@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 4upgrade design system — premium, minimal, green/teal */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 198 73% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 198 73% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 198 73% 14%;
+
+    /* Brand: deep green primary */
+    --primary: 142 76% 36%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 142 70% 45%;
+
+    /* Brand: dark teal */
+    --teal: 198 73% 14%;
+    --teal-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 98%;
+    --secondary-foreground: 198 73% 14%;
+
+    --muted: 210 40% 96.5%;
+    --muted-foreground: 215 16% 40%;
+
+    --accent: 142 60% 96%;
+    --accent-foreground: 142 76% 26%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 142 76% 36%;
+
+    --radius: 0.75rem;
+
+    /* Gradients & shadows */
+    --gradient-brand: linear-gradient(135deg, hsl(142 76% 36%), hsl(198 73% 14%));
+    --gradient-soft: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 40% 98%));
+    --gradient-radial: radial-gradient(circle at 30% 20%, hsl(142 70% 45% / 0.15), transparent 60%);
+
+    --shadow-sm: 0 1px 2px hsl(198 73% 14% / 0.04);
+    --shadow-md: 0 4px 16px -4px hsl(198 73% 14% / 0.08);
+    --shadow-lg: 0 20px 50px -20px hsl(198 73% 14% / 0.18);
+    --shadow-glow: 0 10px 40px -10px hsl(142 76% 36% / 0.35);
+
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 198 73% 8%;
+    --foreground: 0 0% 98%;
+    --card: 198 73% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 198 73% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 142 70% 45%;
+    --primary-foreground: 198 73% 8%;
+    --secondary: 198 50% 14%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 198 50% 14%;
+    --muted-foreground: 215 20% 70%;
+    --accent: 198 50% 14%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 198 50% 18%;
+    --input: 198 50% 18%;
+    --ring: 142 70% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  h1, h2, h3, h4 {
+    @apply tracking-tight;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-brand { background: var(--gradient-brand); }
+  .bg-gradient-soft { background: var(--gradient-soft); }
+  .bg-gradient-radial { background: var(--gradient-radial); }
+  .text-gradient-brand {
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .shadow-elegant { box-shadow: var(--shadow-md); }
+  .shadow-premium { box-shadow: var(--shadow-lg); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .transition-smooth { transition: var(--transition-smooth); }
+}
+
+@layer components {
+  .container-tight {
+    @apply mx-auto w-full max-w-6xl px-6;
+  }
+}
