@@ -20,7 +20,7 @@ export const Footer = () => (
         <div className="flex gap-3">
           <a href="https://www.linkedin.com/company/4upgrade" target="_blank" rel="noopener noreferrer" className="h-9 w-9 rounded-md border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-smooth"><Linkedin className="h-4 w-4" /></a>
           <a href="https://www.instagram.com/4upgrade.in" target="_blank" rel="noopener noreferrer" className="h-9 w-9 rounded-md border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-smooth"><Instagram className="h-4 w-4" /></a>
-          <a href="mailto:hello@4upgrade.in" className="h-9 w-9 rounded-md border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-smooth"><Mail className="h-4 w-4" /></a>
+          <a href="mailto:hello@4upgrade.in" className="h -9 w-9 rounded-md border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-smooth"><Mail className="h-4 w-4" /></a>
         </div>
       </div>
     </div>

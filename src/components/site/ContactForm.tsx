@@ -18,21 +18,53 @@ const helps = [
 const statuses = ["Student", "Fresh graduate", "Working professional", "Overseas aspirant", "Institute / Trainer"];
 
 export const ContactForm = ({ compact = false }: { compact?: boolean }) => {
-  const [selected, setSelected] = useState<string[]>([]);
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    status: "",
+    helpNeeded: [] as string[],
+  });
   const [submitting, setSubmitting] = useState(false);
 
   const toggle = (h: string) =>
-    setSelected((s) => (s.includes(h) ? s.filter((x) => x !== h) : [...s, h]));
+    setFormData((prev) => ({
+      ...prev,
+      helpNeeded: prev.helpNeeded.includes(h)
+        ? prev.helpNeeded.filter((x) => x !== h)
+        : [...prev.helpNeeded, h],
+    }));
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
+
+    const payload = { ...formData };
+
+    try {
+      const response = await fetch("https://fourupgradebackend.onrender.com/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+
       setSubmitting(false);
       toast.success("Thanks! We'll get back to you within 24 hours.");
-      (e.target as HTMLFormElement).reset();
-      setSelected([]);
-    }, 700);
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        status: "",
+        helpNeeded: [],
+      });
+    } catch {
+      setSubmitting(false);
+      toast.error("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -40,23 +72,54 @@ export const ContactForm = ({ compact = false }: { compact?: boolean }) => {
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="name">Full name</Label>
-          <Input id="name" required placeholder="Your name" />
+          <Input
+            id="name"
+            name="name"
+            required
+            placeholder="Your name"
+            value={formData.name}
+            onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
+          />
         </div>
         <div className="space-y-2">
           <Label htmlFor="phone">Phone</Label>
-          <Input id="phone" required type="tel" placeholder="+91 ..." />
+          <Input
+            id="phone"
+            name="phone"
+            required
+            type="tel"
+            placeholder="+91 ..."
+            value={formData.phone}
+            onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
+          />
         </div>
       </div>
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
-        <Input id="email" required type="email" placeholder="you@email.com" />
+        <Input
+          id="email"
+          name="email"
+          required
+          type="email"
+          placeholder="you@email.com"
+          value={formData.email}
+          onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+        />
       </div>
       <div className="space-y-2">
         <Label>Current status</Label>
         <div className="flex flex-wrap gap-2">
           {statuses.map((s) => (
             <label key={s} className="cursor-pointer">
-              <input type="radio" name="status" value={s} className="peer sr-only" required />
+              <input
+                type="radio"
+                name="status"
+                value={s}
+                className="peer sr-only"
+                required
+                checked={formData.status === s}
+                onChange={(e) => setFormData((prev) => ({ ...prev, status: e.target.value }))}
+              />
               <span className="inline-flex px-3 py-1.5 rounded-full text-xs font-medium border border-border bg-background peer-checked:bg-primary peer-checked:text-primary-foreground peer-checked:border-primary transition-smooth">
                 {s}
               </span>
@@ -69,7 +132,7 @@ export const ContactForm = ({ compact = false }: { compact?: boolean }) => {
         <div className="grid sm:grid-cols-2 gap-2">
           {helps.map((h) => (
             <label key={h} className="flex items-center gap-2 px-3 py-2.5 rounded-lg border border-border hover:border-primary/40 cursor-pointer transition-smooth has-[:checked]:bg-accent has-[:checked]:border-primary/50">
-              <Checkbox checked={selected.includes(h)} onCheckedChange={() => toggle(h)} />
+              <Checkbox checked={formData.helpNeeded.includes(h)} onCheckedChange={() => toggle(h)} />
               <span className="text-sm">{h}</span>
             </label>
           ))}
