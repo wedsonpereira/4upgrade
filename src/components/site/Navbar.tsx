@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
+import { SiteNavLink } from "./SiteNavLink";
 
 const links = [
   { href: "#who", label: "Who we serve" },
@@ -20,15 +21,19 @@ export const Navbar = () => {
         {!onAds && (
           <nav className="hidden md:flex items-center gap-8">
             {links.map((l) => (
-              <a key={l.href} href={l.href} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-smooth">
+              <SiteNavLink
+                key={l.href}
+                to={`/${l.href}`}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-smooth"
+              >
                 {l.label}
-              </a>
+              </SiteNavLink>
             ))}
           </nav>
         )}
         <div className="flex items-center gap-3">
           {onAds ? (
-            <Button asChild variant="ghost" size="sm">
+            <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
               <Link to="/">Main site</Link>
             </Button>
           ) : (
@@ -37,7 +42,7 @@ export const Navbar = () => {
             </Button>
           )}
           <Button asChild variant="default" size="sm">
-            <a href="#contact">Get Started</a>
+            <SiteNavLink to={onAds ? "/get-hired#form" : "/#contact"}>Get Started</SiteNavLink>
           </Button>
         </div>
       </div>

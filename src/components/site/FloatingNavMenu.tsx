@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { ArrowUp, Briefcase, Home, Mail, Menu, Route, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { SiteNavLink } from "./SiteNavLink";
 
 const homeLinks = [
   { href: "/#who", label: "Who we serve", icon: Route },
@@ -74,7 +75,7 @@ export function FloatingNavMenu() {
         </div>
         <nav className="grid gap-1">
           {links.map((item) => (
-            <Link
+            <SiteNavLink
               key={`${item.href}-${item.label}`}
               to={item.href}
               onClick={() => setOpen(false)}
@@ -84,7 +85,7 @@ export function FloatingNavMenu() {
                 <item.icon className="h-4 w-4" />
               </span>
               {item.label}
-            </Link>
+            </SiteNavLink>
           ))}
         </nav>
       </div>

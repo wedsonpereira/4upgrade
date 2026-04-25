@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { ContactForm } from "@/components/site/ContactForm";
+import { SiteNavLink } from "@/components/site/SiteNavLink";
 import { ArrowRight, MessageCircle, XCircle, CheckCircle2, FileText, Linkedin, MessageSquare, Compass } from "lucide-react";
 
 const problems = [
@@ -40,7 +41,7 @@ const GetHired = () => {
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
               <Button asChild variant="hero" size="lg">
-                <a href="#form">Get my profile reviewed <ArrowRight /></a>
+                <SiteNavLink to="/get-hired#form">Get my profile reviewed <ArrowRight /></SiteNavLink>
               </Button>
               <Button asChild variant="outline" size="lg">
                 <a href="https://wa.me/910000000000" target="_blank" rel="noreferrer"><MessageCircle /> Chat on WhatsApp</a>
@@ -122,7 +123,7 @@ const GetHired = () => {
               <p className="text-5xl font-bold mb-1">Custom</p>
               <p className="opacity-80 mb-6">Pricing based on your goals & timeline.</p>
               <Button asChild variant="secondary" size="lg" className="w-full">
-                <a href="#form">Talk to our team <ArrowRight /></a>
+                <a href="tel:+918590210369">Talk to our team <ArrowRight /></a>
               </Button>
               <p className="text-xs opacity-70 mt-4 text-center">Free 15-min discovery call included.</p>
             </div>
@@ -147,7 +148,7 @@ const GetHired = () => {
         <div className="container-tight max-w-3xl text-center">
           <h2 className="text-3xl sm:text-5xl font-bold text-teal mb-6">Stop guessing. <span className="text-gradient-brand">Start getting responses.</span></h2>
           <Button asChild variant="hero" size="xl">
-            <a href="#form">Get my profile reviewed <ArrowRight /></a>
+            <SiteNavLink className="p-3" to="/get-hired#form">Get my profile reviewed <ArrowRight /></SiteNavLink>
           </Button>
         </div>
       </section>
