@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: 4upgrade-api
+    env: node
+    region: singapore # change to your preferred region
+    plan: free # or 'starter' for always-on
+    rootDir: 4upgradebackend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000 # Render assigns this automatically; keep as 10000
+      - key: CORS_ORIGINS
+        sync: false # comma-separated frontend URLs
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_SECURE
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: CONTACT_EMAIL
+        sync: false
+      - key: FROM_NAME
+        sync: false
